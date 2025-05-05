@@ -65,7 +65,7 @@
 (define shell32-lib (ffi-lib "shell32.dll"))
 (define uxtheme-lib (ffi-lib "uxtheme.dll"))
 (define winmm-lib (ffi-lib "winmm.dll"))
-(define dwampi-lib (ffi-lib "dwmapi.ddl"))
+(define dwampi-lib (ffi-lib "Dwmapi.ddl"))
 
 (define-ffi-definer define-gdi32 gdi32-lib)
 (define-ffi-definer define-user32 user32-lib)
