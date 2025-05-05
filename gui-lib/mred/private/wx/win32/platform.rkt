@@ -101,8 +101,11 @@
    graphical-system-type
    white-on-black-panel-scheme?))
 
+(define dark-mode-cache #f)
+
 (define (white-on-black-panel-scheme?)
-  ;; if the background and foreground are the same
-  ;; color, probably something has gone wrong;
-  ;; in that case we want to return #f.
-  #t)
+  (cond ((equal? dark-mode-cache "0") #t)
+        ((equal? dark-mode-cache "1") #f)
+        (else (begin
+         (set! dark-mode-cache (get-resource "HKEY_CURRENT_USER" "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize\\AppsUseLightTheme")))
+         (white-on-black-panel-scheme?))))
