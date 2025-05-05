@@ -184,6 +184,12 @@
                                        -> _HWND)
   #:c-id CreateWindowExW)
 
+(define-dwampi DwmSetWindowAttribute (_wfun _HWND
+                                            _DWORD
+                                            _INT_PTR
+                                            _DWORD
+                                            -> _HRESULT))
+
 (define (make-CreateWindowEx register!)
   ((allocator remember-to-free-later)
    (lambda (dwExStyle lpClassName lpWindowName dwStyle 
@@ -192,6 +198,11 @@
      (let ([hwnd (_CreateWindowExW dwExStyle lpClassName lpWindowName dwStyle 
                                    x y nWidth nHeight 
                                    hWndParent hMenu hInstance lpParam)])
+
+       (define bool _BOOL)
+       (bool #t)
+       (DwmSetWindowAttribute hwnd 20 bool (ctype-sizeof bool))
+
        (register! hwnd)
        hwnd))))
 
